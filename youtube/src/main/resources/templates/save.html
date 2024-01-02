@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>save</title>
+    <!-- jquery cdn -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+
+</head>
+<body>
+  <h2>회원가입</h2>
+  <!-- action: form 에저 저장한 데이터를 어디로 보낼지 지정 -->
+  <form action="/member/save" method="post">
+    <table>
+      <tr>
+        <td>이메일</td>
+        <!-- name 속성: 서버로 전송할 때 변수 이름의 역할-->
+        <!-- onkeyup 키 입력을 받을 때마다 함수요청-->
+        <!-- onblur 위치가 벗어날 때 함수요청-->
+        <td><input type="text" name="memberEmail" id="memberEmail" onkeyup="emailCheck()"></td>
+      </tr>
+      <tr>
+        <td colspan="2"><span id="check-result"></span></td>
+      </tr>
+      <tr>
+        <td>비밀번호</td>
+        <td><input type="password" name="memberPassword"></td>
+      </tr>
+      <tr>
+        <td>이름</td>
+        <td><input type="text" name="memberName"></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <input type="submit" value="회원가입" id="submit">
+        </td>
+      </tr>
+    </table>
+  </form>
+</body>
+<script th:inline="javascript">
+    const emailCheck = () => {
+      const email = document.getElementById("memberEmail").value;
+      const checkResult = document.getElementById("check-result");
+      const submit = document.getElementById("submit");
+
+      console.log("입력값:", email)
+      $.ajax({
+        // 요청 방식: post, url: "email-check", 데이터: 이메일
+        type: "post",
+        url: "/member/email-check",
+        data: {
+          "memberEmail": email
+        },
+        success: function (res) {
+          console.log("요청성공", res)
+          if (res == "ok") {
+            console.log("사용가능한 이메일")
+            checkResult.style.color = "green"
+            //submit.style.visibility = "visible"
+            $("#submit").show(300);
+            checkResult.innerHTML = "사용가능한 이메일"
+          } else {
+            console.log("사용불가능한 이메일")
+            checkResult.style.color = "red"
+            //submit.style.visibility = "hidden"
+            $("#submit").hide(300);
+            checkResult.innerHTML = "이미 사용중인 이메일"
+          }
+        },
+        error: function (err) {
+          console.log("에러발생", err)
+        }
+      });
+    }
+</script>
+</html>

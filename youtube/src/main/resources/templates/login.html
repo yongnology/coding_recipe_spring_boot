@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+</head>
+<body>
+<form action="/member/login" method="post">
+    <h2>로그인창</h2>
+    <table>
+        <tr>
+            <td><label for="memberEmail">이메일</label></td>
+            <td><input type="text" name="memberEmail" id="memberEmail"></td>
+        </tr>
+        <tr>
+            <td><label for="memberPassword">비밀번호</label></td>
+            <td><input type="password" name="memberPassword" id="memberPassword"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="로그인"></td>
+        </tr>
+    </table>
+</form>
+<a href="/member/save">회원가입</a>
+</body>
+</html>
