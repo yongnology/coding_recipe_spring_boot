@@ -17,24 +17,24 @@ public class MemberController {
     private final MemberService memberService;
 
     //  회원가입 페이지 출력 요청
-    @GetMapping("/member/save")
+    @GetMapping("/member/join")
     public String saveForm() {
         System.out.println("★★★ MemberController.saveForm()");
-        return "save";
+        return "join";
     }
 
-    @PostMapping("/member/save")
-    public String save(@ModelAttribute MemberDTO memberDTO)
+    @PostMapping("/member/join")
+    public String join(@ModelAttribute MemberDTO memberDTO)
 //                       (@RequestParam("memberEmail") String memberEmail,
 //                       @RequestParam("memberPassword") String memberPassword,
 //                       @RequestParam("memberName") String memberName)
     {
-            System.out.println("★★★MemberController.save");
+            System.out.println("★★★MemberController.join");
             System.out.println("★★★memberDTO = " + memberDTO);
 //          System.out.println("memberEmail = " + memberEmail + ", memberPassword = " + memberPassword + ", memberName = " + memberName);
 
-        memberService.save(memberDTO);
-            System.out.println("★★★ MemberController.save()");
+        memberService.join(memberDTO);
+            System.out.println("★★★ MemberController.join()");
         return "login";
     }
 
@@ -113,7 +113,7 @@ public class MemberController {
     @GetMapping("/member/logout")
     public String logout(HttpSession session) {
         session.invalidate();
-        return "index";
+        return "index2";
     }
 
     @PostMapping("/member/email-check")

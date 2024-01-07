@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>index</title>
 </head>
 <body>
-  <h2>Hello Spring Boot!</h2>
-  <h2>인덱스 파일 입니다.</h2>
-    <a href="/member/save">회원가입</a>
-    <a href="/member/login">로그인</a>
-    <a href="/member/">회원목록</a>
+    <button onclick="saveReq()">글작성</button>
+    <a href="/board/save" method="post">글작성</a>
 </body>
+<script>
+    const saveReq = () => {
+        location.href="/board/save";
+    }
+</script>
 </html>
