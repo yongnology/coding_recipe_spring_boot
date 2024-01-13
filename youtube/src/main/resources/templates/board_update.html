@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>update</title>
+</head>
+<body>
+<form action="/board/update" method="post" name="updateForm">
+  <input type="hidden" name="id" th:value="${boardUpdate.id}">
+  <table>
+    <tr>
+      <td>writer</td>
+      <td><input type="text" name="boardWriter" th:value="${boardUpdate.boardWriter}" readonly></td>
+    </tr>
+    <tr>
+      <td>pass</td>
+      <td><input type="text" name="boardPass" id="boardPass"></td>
+    </tr>
+    <tr>
+      <td>title</td>
+      <td><input type="text" name="boardTitle" th:value="${boardUpdate.boardTitle}"></td>
+    </tr>
+    <tr>
+      <td>contents</td>
+      <td><textarea name="boardContents" cols="30" rows="10" th:text="${boardUpdate.boardContents}"></textarea></td>
+    </tr>
+    <tr>
+      <td colspan="2"><input type="button" value="글수정" onclick="boardUpdate()"></td>
+    </tr>
+  </table>
+  <input type="hidden" name="boardHits" th:value="${boardUpdate.boardHits}">
+</form>
+<script th:inline="javascript">
+  const boardUpdate = () => {
+    const pass = [[${boardUpdate.boardPass}]];
+    const inputPass = document.getElementById("boardPass").value;
+    if (pass == inputPass) {
+      document.updateForm.submit();
+    } else {
+      alert("비밀번호가 일치하지 않습니다!");
+    }
+  }
+</script>
+</body>
